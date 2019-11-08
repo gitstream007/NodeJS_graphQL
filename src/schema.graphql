@@ -1,0 +1,50 @@
+type Car {
+    carId: ID!
+    driver: Driver
+    carType: String
+    carState: String
+}
+type Driver {
+    driverId: ID!
+    carIds: [Car]
+    driverName: String
+    driverState: String
+}
+type Query {
+    # query{cars{carId driver{driverId}}} ok
+    cars: [Car!]!
+
+    # query{car(carId:777){carId driver{driverId}}} ok
+    car( carId: ID! ): Car!
+
+    # query{drivers{driverId driverName driverState carIds{carType}}} ok pas de car dedans
+    drivers: [Driver!]!
+
+    # query{driver(driverId:1){driverId driverName driverState carIds{carId}}} ok pas de car dedans
+    driver(driverId: ID!): Driver!
+}
+
+type Mutation {
+    # create new car
+    # mutation{createCar( ){carId}}
+    createCar(
+        carId: ID!,
+    ): Car!
+
+    # 1 car -> 1 driver
+    # mutation{assignCars( )}
+    assignCars(
+        carId: ID!
+        driverId: ID!,
+    ): Car!
+
+    createDriver(
+        driverId: ID!,
+    ):Driver!
+
+    #  retirer 1 voiture d'1 driver
+    unassignCar(
+        carId: ID!,
+        driverId: ID!
+    ): Boolean!
+}

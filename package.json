@@ -1,0 +1,17 @@
+{
+  "name": "thing-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "graphpack",
+    "build": "graphpack build"
+    },
+  "license": "MIT",
+  "devDependencies": {
+    "graphpack": "^1.0.9"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "elasticsearch": "^16.5.0"
+  }
+}
